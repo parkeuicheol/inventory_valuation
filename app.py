@@ -943,10 +943,10 @@ def load_소재성_재공():
     # '폐기가능성' 컬럼에서 '%' 및 '-' 문구를 삭제하고 float64로 변환
     final_summary.loc[:, '폐기가능성'] = (
         final_summary['폐기가능성']
-        .astype(str)
-        .str.rstrip('%')                  # 뒤 % 제거
-        .replace('', '0', regex=False)    # 빈 문자열은 '0'으로
-        .astype(float)                    # float 타입으로 캐스팅
+        .str.replace('%', '', regex=False)
+        .str.replace('-', '', regex=False)
+        .replace('', '0')
+        .astype('float64')
     )
     final_summary.loc[:, '연령구분'] = final_summary['연령구분'].astype('float64')
     # 처리할 컬럼 리스트
